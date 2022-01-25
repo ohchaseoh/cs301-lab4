@@ -26,7 +26,7 @@
         android:orientation="horizontal"
         android:layout_weight="1">
 
-        <!--        CakeView is a custom SurfaceView that is defined in the app's source code -->
+        <!--  -      CakeView is a custom SurfaceView that is defined in the app's source code -->
         <cs301.birthdaycake.CakeView
             android:id="@+id/cakeview"
             android:layout_width="match_parent"
