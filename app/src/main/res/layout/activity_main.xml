@@ -13,8 +13,9 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:textSize="40sp"
             android:textColor="#FFFFA500"
             android:text="Happy Birthday" />
@@ -40,49 +41,68 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="How many candles?" />
+                android:text="How many candles?"
+                android:layout_margin="10dp"/>
 
             <SeekBar
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:progress="2"
+                android:max="5"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Frosting"/>
+                android:text="Frosting"
+                android:layout_margin="10dp"
+                android:checked="true"/>
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Candles"/>
+                android:text="Candles"
+                android:layout_margin="10dp"
+                android:checked="true"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Blow Out" />
+                android:text="Blow Out"
+                android:layout_margin="10dp"/>
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Goodbye" />
+                android:text="Goodbye"
+                android:onClick="goodbye"
+                android:layout_margin="10dp"/>
         </LinearLayout>
 
     </LinearLayout>
