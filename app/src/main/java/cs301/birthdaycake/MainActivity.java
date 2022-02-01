@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.SeekBar;
+import android.widget.Switch;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -23,6 +26,14 @@ public class MainActivity extends AppCompatActivity
         Button blowOutButton = findViewById(R.id.blowButton);
         // set the cakeController to listen to the blowOutButton
         blowOutButton.setOnClickListener(cakeController);
+        // create a reference to the "candles" switch
+        Switch candleSwitch = findViewById(R.id.candleSwitch);
+        // set the cakeController to listen to the candleSwitch
+        candleSwitch.setOnCheckedChangeListener(cakeController);
+        // create a reference to the candle amt seekbar
+        SeekBar candleSeekBar = findViewById(R.id.candleSeekBar);
+        // set the cakeController to listen to the candleSeekBar
+
     }
 
     public void goodbye(View button)

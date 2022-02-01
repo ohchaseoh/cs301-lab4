@@ -33,11 +33,11 @@ public class CakeModel
         isFrosted = frosted;
     }
 
-    public boolean isHasCandles() {
+    public boolean hasCandles() {
         return hasCandles;
     }
 
-    public void setHasCandles(boolean hasCandles) {
+    public void setCandles(boolean hasCandles) {
         this.hasCandles = hasCandles;
     }
 }
