@@ -6,7 +6,9 @@ import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
-public class CakeController implements OnClickListener, CompoundButton.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener
+public class CakeController implements OnClickListener,
+        CompoundButton.OnCheckedChangeListener,
+        SeekBar.OnSeekBarChangeListener
 {
     private CakeView cakeView;
     private CakeModel cakeModel;
@@ -55,7 +57,8 @@ public class CakeController implements OnClickListener, CompoundButton.OnChecked
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+        cakeModel.setNumCandles(progress);
+        cakeView.invalidate();
     }
 
     @Override

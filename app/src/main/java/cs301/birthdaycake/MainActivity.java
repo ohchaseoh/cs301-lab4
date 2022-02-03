@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity
         // create a reference to the candle amt seekbar
         SeekBar candleSeekBar = findViewById(R.id.candleSeekBar);
         // set the cakeController to listen to the candleSeekBar
+        candleSeekBar.setOnSeekBarChangeListener(cakeController);
 
     }
 
