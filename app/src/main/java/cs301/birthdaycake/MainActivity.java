@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity
         CakeView cakeView = findViewById(R.id.cakeview);
         // create the cake controller
         CakeController cakeController = new CakeController(cakeView);
+        // set the cackeController to listen to the cakeView
+        cakeView.setOnTouchListener(cakeController);
         // create a reference to the "blow out" button
         Button blowOutButton = findViewById(R.id.blowButton);
         // set the cakeController to listen to the blowOutButton

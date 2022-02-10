@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
@@ -18,6 +19,8 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+
+    Paint balloonPaint = new Paint();
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -35,7 +38,9 @@ public class CakeView extends SurfaceView {
     public static final float wickWidth = 6.0f;
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
+    public static final float balloonRadius = 100.0f;
 
+    Path newBalloon = new Path();
 
     /**
      * ctor must be overridden here as per standard Java inheritance practice.  We need it
@@ -62,6 +67,8 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        balloonPaint.setColor(Color.BLUE);
+        balloonPaint.setStyle(Paint.Style.FILL);
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -130,7 +137,18 @@ public class CakeView extends SurfaceView {
         {
             drawCandle(canvas, cakeLeft + (i+1) * cakeWidth / 6 - candleWidth / 2, cakeTop);
         }
+        canvas.drawPath(newBalloon, balloonPaint);
     }//onDraw
+
+    public void drawBalloon(float x, float y)
+    {
+        newBalloon.reset();
+        newBalloon.addArc(x - balloonRadius, y - balloonRadius, x + balloonRadius, y + balloonRadius, 180, 180);
+        newBalloon.addArc(x - balloonRadius, y - balloonRadius*(1.5f), x + balloonRadius, y + balloonRadius + 50, 0, 180);
+        newBalloon.addRect(x - 2, y + balloonRadius + 50, x + 2, y + 700, Path.Direction.CW);
+        newBalloon.close();
+        this.invalidate();
+    }
 
     //getter method for cakeModel
     public CakeModel getCakeModel()
