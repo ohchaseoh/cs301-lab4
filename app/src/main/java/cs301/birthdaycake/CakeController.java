@@ -79,6 +79,7 @@ public class CakeController implements OnClickListener, View.OnTouchListener,
             cakeModel.CoordY = (int) motionEvent.getY();
             cakeView.invalidate();
             cakeModel.setHasTouched(true);
+            cakeView.drawBalloon(motionEvent.getX(), motionEvent.getY());
             return true;
         }
         return false;
