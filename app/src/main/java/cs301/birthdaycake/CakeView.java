@@ -4,12 +4,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 public class CakeView extends SurfaceView {
 
-    private CakeModel cakeModel;
+    private final CakeModel cakeModel;
 
     /* These are the paints we'll use to draw the birthday cake below */
     Paint cakePaint = new Paint();
@@ -18,6 +19,10 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+
+    Paint checkGreenPaint = new Paint();
+    Paint checkRedPaint = new Paint();
+
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -36,6 +41,7 @@ public class CakeView extends SurfaceView {
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
 
+    public static final float checkeredSize = 30.0f;
 
     /**
      * ctor must be overridden here as per standard Java inheritance practice.  We need it
@@ -62,6 +68,11 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+
+        checkGreenPaint.setColor(0xFF92D050);
+        checkGreenPaint.setStyle(Paint.Style.FILL);
+        checkRedPaint.setColor(0xFFC00000);
+        checkRedPaint.setStyle(Paint.Style.FILL);
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -130,7 +141,19 @@ public class CakeView extends SurfaceView {
         {
             drawCandle(canvas, cakeLeft + (i+1) * cakeWidth / 6 - candleWidth / 2, cakeTop);
         }
+
+        drawCheckered(canvas);
+
     }//onDraw
+
+    public void drawCheckered(Canvas canvas) {
+
+        canvas.drawRect(cakeModel.x, cakeModel.y, cakeModel.x + checkeredSize, cakeModel.y + checkeredSize, checkGreenPaint);
+        canvas.drawRect(cakeModel.x - checkeredSize, cakeModel.y - checkeredSize, cakeModel.x, cakeModel.y, checkGreenPaint);
+        canvas.drawRect(cakeModel.x, cakeModel.y - checkeredSize, cakeModel.x + checkeredSize, cakeModel.y, checkRedPaint);
+        canvas.drawRect(cakeModel.x - checkeredSize, cakeModel.y, cakeModel.x, cakeModel.y + checkeredSize, checkRedPaint);
+
+    }
 
     //getter method for cakeModel
     public CakeModel getCakeModel()

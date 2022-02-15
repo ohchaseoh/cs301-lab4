@@ -1,6 +1,8 @@
 package cs301.birthdaycake;
 
+import android.graphics.Canvas;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
@@ -8,10 +10,11 @@ import android.widget.SeekBar;
 
 public class CakeController implements OnClickListener,
         CompoundButton.OnCheckedChangeListener,
-        SeekBar.OnSeekBarChangeListener
+        SeekBar.OnSeekBarChangeListener,
+        View.OnTouchListener
 {
-    private CakeView cakeView;
-    private CakeModel cakeModel;
+    private final CakeView cakeView;
+    private final CakeModel cakeModel;
 
     public CakeController(CakeView initCakeView)
     {
@@ -30,28 +33,14 @@ public class CakeController implements OnClickListener,
     {
         Log.d("tag","nice");
         // if candle lit, set unlit and vice versa
-        if(cakeModel.isLit())
-        {
-            cakeModel.setLit(false);
-        }
-        else
-        {
-            cakeModel.setLit(true);
-        }
+        cakeModel.setLit(!cakeModel.isLit());
         cakeView.invalidate();
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
     {
-        if(isChecked)
-        {
-            cakeModel.setCandles(true);
-        }
-        else
-        {
-            cakeModel.setCandles(false);
-        }
+        cakeModel.setCandles(isChecked);
         cakeView.invalidate();
     }
 
@@ -69,5 +58,14 @@ public class CakeController implements OnClickListener,
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         // do nothing
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent event)
+    {
+        cakeModel.x = (int) event.getX();
+        cakeModel.y = (int) event.getY();
+        cakeView.invalidate();
+        return false;
     }
 }
