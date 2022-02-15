@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity
         // set the cakeController to listen to the candleSeekBar
         candleSeekBar.setOnSeekBarChangeListener(cakeController);
 
-        cakeView.setOnTouchListener(cakeController);
-
     }
 
     public void goodbye(View button)

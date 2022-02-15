@@ -149,25 +149,19 @@ public class CakeView extends SurfaceView {
             drawCandle(canvas, cakeLeft + (i+1) * cakeWidth / 6 - candleWidth / 2, cakeTop);
         }
 
+        drawText(canvas);
         drawCheckered(canvas);
-
         canvas.drawPath(newBalloon, balloonPaint);
 
-        if(cakeModel.hasTouched() == true) {
-            coordinates.setTextSize(50);
-            canvas.drawText(cakeModel.getCoordX() + ", " + cakeModel.getCoordY(), 1750, 700, coordinates);
-        }
     }//onDraw
 
-    public void drawCheckered(Canvas canvas) {
-
-        canvas.drawRect(cakeModel.x, cakeModel.y, cakeModel.x + checkeredSize, cakeModel.y + checkeredSize, checkGreenPaint);
-        canvas.drawRect(cakeModel.x - checkeredSize, cakeModel.y - checkeredSize, cakeModel.x, cakeModel.y, checkGreenPaint);
-        canvas.drawRect(cakeModel.x, cakeModel.y - checkeredSize, cakeModel.x + checkeredSize, cakeModel.y, checkRedPaint);
-        canvas.drawRect(cakeModel.x - checkeredSize, cakeModel.y, cakeModel.x, cakeModel.y + checkeredSize, checkRedPaint);
-
+    //part a
+    public void drawText(Canvas canvas) {
+        coordinates.setTextSize(50);
+        canvas.drawText(cakeModel.getCoordX() + ", " + cakeModel.getCoordY(), 50, 50, coordinates);
     }
 
+    //part b
     public void drawBalloon(float x, float y)
     {
         newBalloon.reset();
@@ -176,6 +170,16 @@ public class CakeView extends SurfaceView {
         newBalloon.addRect(x - 2, y + balloonRadius + 50, x + 2, y + 700, Path.Direction.CW);
         newBalloon.close();
         this.invalidate();
+    }
+
+    //part c
+    public void drawCheckered(Canvas canvas) {
+
+        canvas.drawRect(cakeModel.x, cakeModel.y, cakeModel.x + checkeredSize, cakeModel.y + checkeredSize, checkGreenPaint);
+        canvas.drawRect(cakeModel.x - checkeredSize, cakeModel.y - checkeredSize, cakeModel.x, cakeModel.y, checkGreenPaint);
+        canvas.drawRect(cakeModel.x, cakeModel.y - checkeredSize, cakeModel.x + checkeredSize, cakeModel.y, checkRedPaint);
+        canvas.drawRect(cakeModel.x - checkeredSize, cakeModel.y, cakeModel.x, cakeModel.y + checkeredSize, checkRedPaint);
+
     }
 
     //getter method for cakeModel
