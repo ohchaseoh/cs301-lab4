@@ -10,7 +10,7 @@ import android.view.SurfaceView;
 
 public class CakeView extends SurfaceView {
 
-    private final CakeModel cakeModel;
+    private CakeModel cakeModel;
 
     /* These are the paints we'll use to draw the birthday cake below */
     Paint cakePaint = new Paint();
@@ -19,6 +19,8 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    Paint coordinates = new Paint();
+    Paint balloonPaint = new Paint();
 
     Paint checkGreenPaint = new Paint();
     Paint checkRedPaint = new Paint();
@@ -40,8 +42,10 @@ public class CakeView extends SurfaceView {
     public static final float wickWidth = 6.0f;
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
+    public static final float balloonRadius = 100.0f;
 
     public static final float checkeredSize = 30.0f;
+    Path newBalloon = new Path();
 
     /**
      * ctor must be overridden here as per standard Java inheritance practice.  We need it
@@ -68,6 +72,9 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        balloonPaint.setColor(Color.BLUE);
+        balloonPaint.setStyle(Paint.Style.FILL);
+        coordinates.setColor(Color.RED);
 
         checkGreenPaint.setColor(0xFF92D050);
         checkGreenPaint.setStyle(Paint.Style.FILL);
@@ -144,6 +151,12 @@ public class CakeView extends SurfaceView {
 
         drawCheckered(canvas);
 
+        canvas.drawPath(newBalloon, balloonPaint);
+
+        if(cakeModel.hasTouched() == true) {
+            coordinates.setTextSize(50);
+            canvas.drawText(cakeModel.getCoordX() + ", " + cakeModel.getCoordY(), 1750, 700, coordinates);
+        }
     }//onDraw
 
     public void drawCheckered(Canvas canvas) {
@@ -153,6 +166,16 @@ public class CakeView extends SurfaceView {
         canvas.drawRect(cakeModel.x, cakeModel.y - checkeredSize, cakeModel.x + checkeredSize, cakeModel.y, checkRedPaint);
         canvas.drawRect(cakeModel.x - checkeredSize, cakeModel.y, cakeModel.x, cakeModel.y + checkeredSize, checkRedPaint);
 
+    }
+
+    public void drawBalloon(float x, float y)
+    {
+        newBalloon.reset();
+        newBalloon.addArc(x - balloonRadius, y - balloonRadius, x + balloonRadius, y + balloonRadius, 180, 180);
+        newBalloon.addArc(x - balloonRadius, y - balloonRadius*(1.5f), x + balloonRadius, y + balloonRadius + 50, 0, 180);
+        newBalloon.addRect(x - 2, y + balloonRadius + 50, x + 2, y + 700, Path.Direction.CW);
+        newBalloon.close();
+        this.invalidate();
     }
 
     //getter method for cakeModel

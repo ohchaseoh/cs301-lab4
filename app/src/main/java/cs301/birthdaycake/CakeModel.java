@@ -1,7 +1,5 @@
 package cs301.birthdaycake;
 
-import android.graphics.Canvas;
-
 public class CakeModel
 {
     //instance var
@@ -9,8 +7,10 @@ public class CakeModel
     private int numCandles = 2;
     private boolean isFrosted = true;
     private boolean hasCandles = true;
-    public boolean hasTouched = false;
     public int x, y;
+    public boolean hasTouched = false;
+    public int CoordX = 0;
+    public int CoordY = 0;
 
     //setters and getters below
     public boolean isLit() {
@@ -45,10 +45,18 @@ public class CakeModel
         this.hasCandles = hasCandles;
     }
 
+    public void setHasTouched(boolean hasTouched) { this.hasTouched = hasTouched;}
 
-    public void setHasTouched(boolean hasTouched) {this.hasTouched = hasTouched; }
+    public boolean hasTouched() { return hasTouched; }
 
-    public boolean getHasTouched() { return hasTouched; }
+    public void setCoordX(int coordX) { this.CoordX = coordX; }
+
+    public int getCoordX() { return CoordX; }
+
+    public void setCoordY(int coordY) { this.CoordY = coordY; }
+
+    public int getCoordY() { return CoordY; }
+
 
     public void setX(int x) { this.x = x; }
 

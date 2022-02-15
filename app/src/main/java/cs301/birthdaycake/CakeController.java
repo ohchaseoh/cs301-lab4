@@ -1,8 +1,6 @@
 package cs301.birthdaycake;
 
-import android.graphics.Canvas;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
@@ -10,11 +8,10 @@ import android.widget.SeekBar;
 
 public class CakeController implements OnClickListener,
         CompoundButton.OnCheckedChangeListener,
-        SeekBar.OnSeekBarChangeListener,
-        View.OnTouchListener
+        SeekBar.OnSeekBarChangeListener
 {
-    private final CakeView cakeView;
-    private final CakeModel cakeModel;
+    private CakeView cakeView;
+    private CakeModel cakeModel;
 
     public CakeController(CakeView initCakeView)
     {
@@ -33,14 +30,28 @@ public class CakeController implements OnClickListener,
     {
         Log.d("tag","nice");
         // if candle lit, set unlit and vice versa
-        cakeModel.setLit(!cakeModel.isLit());
+        if(cakeModel.isLit())
+        {
+            cakeModel.setLit(false);
+        }
+        else
+        {
+            cakeModel.setLit(true);
+        }
         cakeView.invalidate();
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
     {
-        cakeModel.setCandles(isChecked);
+        if(isChecked)
+        {
+            cakeModel.setCandles(true);
+        }
+        else
+        {
+            cakeModel.setCandles(false);
+        }
         cakeView.invalidate();
     }
 
@@ -66,6 +77,19 @@ public class CakeController implements OnClickListener,
         cakeModel.x = (int) event.getX();
         cakeModel.y = (int) event.getY();
         cakeView.invalidate();
+        return false;
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if (motionEvent.getActionMasked() == motionEvent.ACTION_DOWN) {
+            cakeModel.CoordX = (int) motionEvent.getX();
+            cakeModel.CoordY = (int) motionEvent.getY();
+            cakeView.invalidate();
+            cakeModel.setHasTouched(true);
+            cakeView.drawBalloon(motionEvent.getX(), motionEvent.getY());
+            return true;
+        }
         return false;
     }
 }
